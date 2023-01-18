@@ -2,6 +2,113 @@
 
 .header {
     margin-top: 1rem;
+    padding:1rem;
     display: flex;
     justify-content: space-between;
+}
+
+.nav {
+   width: 60%;
+}
+
+.nav__menu {
+    
+    @include resetList;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top:6rem;
+    left: -100%;
+    opacity: 1;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 2 ease;
+    background-color: rgba(0,0,0,.95);
+    padding-top:4rem;
+
+    &.active {
+        left:0;
+    }
+
+    @include breakpoint(l){
+        flex-direction: row;
+        flex: 1;
+        position:relative;
+        background-color: transparent;
+        height: auto;
+        top: auto;
+        left: auto;
+        padding: 0
+
+
+    }
+}
+
+.menu-icon {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(-90%, 5%);
+	font-size: 2.5rem;
+	cursor: pointer;
+    color: black;
+
+    @include breakpoint(l){
+        display: none;
+    }
+}
+
+.nav__list-item {
+    margin: .5rem 1rem;
+
+    a {
+        font-weight: 800;
+        color: white;
+        border-bottom: 2px solid transparent;
+        padding-bottom: .5rem;
+
+        &:hover, &:focus {
+            text-decoration: none;
+            border-color: $color-secondary;
+        }
+    }
+
+    @include breakpoint(l) {
+        a{
+            color: $color-primary;
+            font-weight: 800;
+            
+
+            &:hover, &:focus {
+                color: $color-base;
+            }
+        }
+    }
+}
+
+.menu-icon {
+	display: block;
+	position: absolute;
+	top: 2rem;
+	right: 0;
+	font-size: 2.5rem;
+	cursor: pointer;
+    color:black;
+
+    @include breakpoint(l){
+        display: none;
+    }
+}
+
+.fa-bars {
+	color: $color-base;
+	font-size: 2rem;
+}
+
+.fa-times {
+	color: $color-base;
+	font-size: 2rem;
 }

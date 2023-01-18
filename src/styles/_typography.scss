@@ -15,13 +15,13 @@ h3, .h3 { @include x-rem(font-size, 18px); }
 h4, .h4 { font-family: $font-primary }
 
 a {
-	color:$color-secondary;
-	text-decoration:underline;
+	color:$color-base;
+	text-decoration:none;
 	transition: $trans;
 
 	&:hover, &:focus { 
-        text-decoration:none;
-        color: $color-tertiary; 
+        text-decoration:underline;
+        color: $color-primary;
     }
 }
 

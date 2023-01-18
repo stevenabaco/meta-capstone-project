@@ -1,0 +1,44 @@
+@import '../../../styles/main.scss';
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex:1;
+    width: 100%;
+
+    @include breakpoint(m){
+        flex-direction: row;
+        align-items: flex-start
+    }
+}
+
+.nav-menu__list {
+    @include resetList;
+    color: white;
+    list-style: none;
+    flex: 1;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+}
+
+.nav-menu__inner-list{
+    @include resetList;
+}
+
+.nav-menu__list-item {
+    margin: .25rem 0;
+
+    &--inner {
+        margin: 1rem 0;
+    }
+
+    a {
+        color: $color-invert;
+
+        &:hover, &:focus {
+            color: $color-secondary;
+        }
+    }
+}
