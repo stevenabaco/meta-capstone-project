@@ -1,18 +1,25 @@
 @import '../../styles/main.scss';
 
 .header {
+    @include container;
+    position: relative;
     margin-top: 1rem;
-    padding:1rem;
+    padding:1rem 0;
     display: flex;
     justify-content: space-between;
+
 }
 
 .nav {
-   width: 60%;
+   width: 78%;
+}
+
+.nav__block-row {
+    @include row;
 }
 
 .nav__menu {
-    
+
     @include resetList;
     display: flex;
     flex-direction: column;
@@ -20,19 +27,21 @@
     height: 100vh;
     position: absolute;
     top:6rem;
-    left: -100%;
+    left: -110%;
     opacity: 1;
     justify-content: flex-start;
     align-items: center;
     transition: all 2 ease;
     background-color: rgba(0,0,0,.95);
     padding-top:4rem;
+    z-index: 1;
 
     &.active {
-        left:0;
+        left:-1rem;
+        width: calc(100% + 2rem)
     }
 
-    @include breakpoint(l){
+    @include breakpoint(m){
         flex-direction: row;
         flex: 1;
         position:relative;
@@ -40,7 +49,8 @@
         height: auto;
         top: auto;
         left: auto;
-        padding: 0
+        padding: 0;
+        justify-content: flex-end;
 
 
     }
@@ -49,14 +59,14 @@
 .menu-icon {
 	display: block;
 	position: absolute;
-	top: 0;
+	top: 50%;
+    transform: translateY(-50%);
 	right: 0;
-	transform: translate(-90%, 5%);
 	font-size: 2.5rem;
 	cursor: pointer;
     color: black;
 
-    @include breakpoint(l){
+    @include breakpoint(m){
         display: none;
     }
 }
@@ -76,11 +86,10 @@
         }
     }
 
-    @include breakpoint(l) {
+    @include breakpoint(m) {
         a{
             color: $color-primary;
             font-weight: 800;
-            
 
             &:hover, &:focus {
                 color: $color-base;
@@ -98,17 +107,7 @@
 	cursor: pointer;
     color:black;
 
-    @include breakpoint(l){
+    @include breakpoint(m){
         display: none;
     }
-}
-
-.fa-bars {
-	color: $color-base;
-	font-size: 2rem;
-}
-
-.fa-times {
-	color: $color-base;
-	font-size: 2rem;
 }

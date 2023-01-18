@@ -13,8 +13,7 @@ const FooterNavigation = () => {
 						className={`${classes['nav-menu__inner-list']} ${classes['nav-menu__list-item--inner']}`}>
 						<li
 							className={`${classes['nav-menu__list-item']} ${classes['nav-menu__list-item--inner']}`}>
-							<NavLink
-								exact
+                            <NavLink
 								to='/'>
 								Home
 							</NavLink>

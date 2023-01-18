@@ -1,0 +1,101 @@
+@import '../../../styles/main.scss';
+
+.hero {
+    background-color: $color-primary;
+}
+
+.hero__block-container {
+    @include container;
+}
+
+.hero__block-row {
+    @include row;
+}
+
+.hero__inner-container {
+        padding:1rem;
+        position: relative;
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+        @include breakpoint(sw) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+.hero__content-block {
+    margin:2rem 0;
+
+    @include breakpoint(sw){
+        width:45%;
+    }
+}
+
+.hero__image-wrapper{
+
+    @include breakpoint(sw){
+        width: 50%;
+        max-width: 278px;
+    }
+
+    @include breakpoint(m){
+        position: relative;
+        width: 50%;
+        max-width: 450px;
+        top: 6rem;
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 9/8;
+        object-fit: cover;
+        border-radius: 1rem;
+    }
+}
+
+.hero__heading{
+    @include x-rem(font-size, 44px);
+    color: $color-secondary;
+    line-height: .75;
+    margin-bottom: 0;
+
+    @include breakpoint(m){
+    @include x-rem(font-size, 60px);
+
+    }
+}
+
+.hero__sub-heading{
+    @include x-rem(font-size, 30px);
+    margin-bottom: 1rem;
+    color: $color-invert;
+
+    @include breakpoint(m){
+    @include x-rem(font-size, 30px);
+
+    }
+}
+
+.hero__content{
+    @include x-rem(font-size, 20px);
+    color: $color-invert;
+
+    @include breakpoint(m){
+    @include x-rem(font-size, 22px);
+
+    }
+}
+
+// Button
+
+.button {
+    @include resetBtn;
+    background-color: $color-secondary;
+    padding: .75rem 2rem;
+    border-radius: 10px;
+    @include x-rem(font-size, 20px);
+}

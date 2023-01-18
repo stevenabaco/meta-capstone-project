@@ -5,13 +5,15 @@ import Footer from '../footer/Footer';
 
 
 const Layout = (props) => {
-  return (
-    <>
-        <Header />
-            <main>{props.children}</main>
-        <Footer />
-	</>
+    return (
+        <div className='col-md-12'>
+            <Header />
+            <main>
+                <div>{props.children}</div>
+            </main>
+            <Footer /> 
+        </div>
   );
 }
 
-export default Layout
+export default Layout;
