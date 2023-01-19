@@ -5,10 +5,10 @@
 .testimonials{
     padding: 1rem;
     background-color: $color-primary;
+
     @include breakpoint(m){
         margin-top: 3rem;
     }
-
 }
 
 .highlights__container {
@@ -52,6 +52,7 @@
 
     @include breakpoint(m){
         flex-direction: row;
+        align-items: stretch;
     }
 }
 
