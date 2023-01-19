@@ -4,7 +4,6 @@ import styles from './hero-section.module.scss';
 
 const HeroSection = () => {
     return (
-		<div className={`${styles['hero__block-row']}`}>
 			<section
 				id='hero'
 				className={`${styles['hero']}`}>
@@ -30,7 +29,6 @@ const HeroSection = () => {
 					</div>
 				</div>
 			</section>
-		</div>
 	);
 }
 

@@ -13,7 +13,7 @@ const HighlightsSection = () => {
 					<div className={`${styles['highlights__header']}`}>
 						<h2 className={`${styles['highlights__heading']}`}>This weeks Specials!</h2>
 						<NavLink to='/reserve-table'>
-							<button className={`${styles['button']}`}>Reserve Table</button>
+							<button className={`${styles['button']}`}>Order Online</button>
 						</NavLink>
 					</div>
 					<div className={`${styles['highlights__inner-block']}`}>

@@ -6,7 +6,7 @@ import Footer from '../footer/Footer';
 
 const Layout = (props) => {
     return (
-        <div className='col-md-12'>
+        <div className='site-container'>
             <Header />
             <main>
                 <div>{props.children}</div>

@@ -1,0 +1,111 @@
+@import '../../../styles/main.scss';
+
+.about-section {
+
+}
+
+.about-section__block-container {
+    @include container;
+}
+
+.about-section__block-row {
+    @include row;
+}
+
+.about-section__inner-container {
+        padding:1rem;
+        position: relative;
+        display: flex;
+        gap: 3rem;
+        flex-direction: column-reverse;
+        flex-wrap: nowrap;
+        margin-top: 8rem;
+
+        @include breakpoint(m) {
+            margin: auto;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+.about-section__content-block {
+    margin:2rem 0;
+
+    @include breakpoint(sw){
+        width:60%;
+    }
+}
+
+.hero__image-wrapper{
+    position: relative;
+    @include breakpoint(sw){
+        width: 100%;
+        // max-width: 278px;
+    }
+
+    @include breakpoint(m){
+        position: relative;
+        flex:1;
+        // max-width: 450px;
+        top: 6rem;
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 16/20;
+        object-fit: cover;
+        border-radius: 1rem;
+
+        @include breakpoint(sw){
+            max-width: 280px;
+        }
+        
+
+        &.image2{
+        display: none;
+        position:absolute;
+        top: -6rem;
+        left: 12rem;
+
+        @include breakpoint(sw){
+            display:block;
+        }
+    }
+    }
+
+    
+}
+
+.about-section__heading{
+    @include x-rem(font-size, 44px);
+    color: $color-base;
+    line-height: .75;
+    margin-bottom: 0;
+
+    @include breakpoint(m){
+    @include x-rem(font-size, 60px);
+
+    }
+}
+
+.about-section__sub-heading{
+    @include x-rem(font-size, 30px);
+    margin-bottom: 1rem;
+    color: $color-base;
+
+    @include breakpoint(m){
+    @include x-rem(font-size, 30px);
+
+    }
+}
+
+.about-section__content{
+    @include x-rem(font-size, 18px);
+    color: $color-base;
+
+    @include breakpoint(m){
+    @include x-rem(font-size, 20px);
+
+    }
+}

@@ -8,15 +8,14 @@ const FooterNavigation = () => {
 		<div className={`${classes['nav-menu']}`}>
 			<menu className={`${classes['nav-menu__list']}`}>
 				<li className={`${classes['nav-menu__list-item']}`}>
-					<span>Doormat Navigation</span>
+					<span className={`${classes['nav-menu__list-item-title']}`}>
+						Doormat Navigation
+					</span>
 					<menu
 						className={`${classes['nav-menu__inner-list']} ${classes['nav-menu__list-item--inner']}`}>
 						<li
 							className={`${classes['nav-menu__list-item']} ${classes['nav-menu__list-item--inner']}`}>
-                            <NavLink
-								to='/'>
-								Home
-							</NavLink>
+							<NavLink to='/'>Home</NavLink>
 						</li>
 						<li
 							className={`${classes['nav-menu__list-item']} ${classes['nav-menu__list-item--inner']}`}>
@@ -43,27 +42,31 @@ const FooterNavigation = () => {
 			</menu>
 			<menu className={`${classes['nav-menu__list']}`}>
 				<li className={`${classes['nav-menu__list-item']}`}>
-					<span>Contact</span>
+					<span className={`${classes['nav-menu__list-item-title']}`}>Contact</span>
 					<menu
 						className={`${classes['nav-menu__inner-list']} ${classes['nav-menu__list-item--inner']}`}>
 						<li
 							className={`${classes['nav-menu__list-item']} ${classes['nav-menu__list-item--inner']}`}>
-							<span>Address</span>
+							<p>Little Lemon Restaurant</p>
+							<p>123 Main St,</p>
+							<p>Chicago, IL 60601</p>
 						</li>
 						<li
 							className={`${classes['nav-menu__list-item']} ${classes['nav-menu__list-item--inner']}`}>
-							<span>Phone Number</span>
+							<span>(312) 123 - 9876 </span>
 						</li>
 						<li
 							className={`${classes['nav-menu__list-item']} ${classes['nav-menu__list-item--inner']}`}>
-							<span>Email</span>
+							<span>managment@littlelemon.com</span>
 						</li>
 					</menu>
 				</li>
 			</menu>
 			<menu className={`${classes['nav-menu__list']}`}>
 				<li className={`${classes['nav-menu__list-item']}`}>
-					<span>Social Media Link</span>
+					<span className={`${classes['nav-menu__list-item-title']}`}>
+						Social Media Link
+					</span>
 					<menu
 						className={`${classes['nav-menu__inner-list']} ${classes['nav-menu__list-item--inner']}`}>
 						<li

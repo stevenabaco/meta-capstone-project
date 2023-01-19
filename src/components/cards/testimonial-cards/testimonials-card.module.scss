@@ -1,0 +1,54 @@
+@import '../../../styles/main.scss';
+
+.testimonials-card {
+    max-width: 330px;
+    padding: 1rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #EDEFEE;
+    font-family: $font-secondary;
+    text-align: center;
+
+    @include breakpoint(m){
+        width: 33%;
+        text-align: left;
+    }
+
+    &__name {
+        @include x-rem(font-size, 28px);
+    }
+
+    &__ratings-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        @include breakpoint(m){
+            flex-direction: row;
+        }
+    }
+}
+
+.ratings-block {
+    &__image-wrapper {
+        width: 30%;
+        margin: 0;
+
+        img {
+            width:100%;
+            height:100%;
+            aspect-ratio: 16/16;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    &__review {
+        margin: 1rem 0;
+    }
+
+    &__rating {
+        @include x-rem(font-size, 14px);
+    }
+}

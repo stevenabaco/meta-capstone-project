@@ -6,6 +6,7 @@
     border-radius: 1rem;
     overflow: hidden;
     background-color: #EDEFEE;
+    font-family: $font-secondary;
 
     @include breakpoint(m){
         width: 33%;
@@ -49,12 +50,13 @@
     }
 }
 
-.highlights-card__title {
+.highlights-card__title,
+.highlights-card__price {
+    @include x-rem(font-size, 24px);
     font-weight: 800;
 }
 
 .highlights-card__price {
     color: red;
-    font-weight: 800;
 }
 

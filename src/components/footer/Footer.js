@@ -4,7 +4,7 @@ import classes from './footer.module.scss';
 
 const Footer = () => {
     return (
-		<div className='row'>
+		
 			<footer className={`${classes['footer']}`}>
 				<div className={`${classes['wrapper']}`}>
 					<div className={`${classes['image-wrapper']}`}>
@@ -18,7 +18,7 @@ const Footer = () => {
 					<FooterNavigation />
 				</div>
 			</footer>
-		</div>
+		
 	);
 }
 
