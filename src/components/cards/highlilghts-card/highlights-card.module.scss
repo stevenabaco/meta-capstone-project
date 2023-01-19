@@ -1,0 +1,60 @@
+@import '../../../styles/main.scss';
+
+.highlights-card {
+    width: 100%;
+    max-width: 330px;
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #EDEFEE;
+
+    @include breakpoint(m){
+        width: 33%;
+    }
+}
+
+.highlights-card__image-wrapper {
+    margin: 0;
+
+    img {
+        width:100%;
+        height:100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
+}
+
+.highlights-card__content {
+    padding: .5rem 1rem;
+}
+
+.highlights-card__content-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.highlights-card__content-footer {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1rem;
+    
+    .highlights-card__title,
+    .highlights-card__price {
+        font-weight: 500;
+        color: $color-base;
+    }
+
+    span + span {
+        margin-left: 2rem;
+    }
+}
+
+.highlights-card__title {
+    font-weight: 800;
+}
+
+.highlights-card__price {
+    color: red;
+    font-weight: 800;
+}
+
