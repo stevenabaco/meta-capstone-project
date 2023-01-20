@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import BookingsWidget from '../widgets/bookings-widget/BookingsWidget';
 import styles from './bookings-page.module.scss';
 
@@ -41,14 +41,6 @@ const updateTimes = (dispatch) => (date) => {
 };
 const Bookings = () => {
 	const [state, dispatch] = useReducer(availableTimesReducer, initializeTimes());
-	const [availableTimes, setAvailableTimes] = useState([
-		{ value: '17:00', label: '17:00' },
-		{ value: '18:00', label: '18:00' },
-		{ value: '19:00', label: '19:00' },
-		{ value: '20:00', label: '20:00' },
-		{ value: '21:00', label: '21:00' },
-		{ value: '22:00', label: '22:00' },
-	]);
 
 	return (
 		<div className={`${styles['bookings']}`}>
