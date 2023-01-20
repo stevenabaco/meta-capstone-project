@@ -18,6 +18,7 @@ const availableTimesReducer = (state, action) => {
       return state;
   }
 };
+
 const initializeTimes = () => {
   const initialState = {
     times: [
@@ -33,12 +34,10 @@ const initializeTimes = () => {
   return initialState;
 }
 
-	//need to pass the dispatch function as a prop to the BookingsWidget component and use it inside the updateTimes function
 const updateTimes = (dispatch) => (date) => {
-	// The function will change the available times based on the selected date
-	// For now, the function can return the same available times regardless of the date
 	dispatch({ type: 'UPDATE_TIMES', payload: initializeTimes().times });
 };
+
 const Bookings = () => {
 	const [state, dispatch] = useReducer(availableTimesReducer, initializeTimes());
 
@@ -58,7 +57,8 @@ const Bookings = () => {
 				</p>
 				<BookingsWidget
 					state={state}
-					updateTimes={updateTimes(dispatch)}
+          dispatch={dispatch}
+          updateTimes={updateTimes(dispatch)}
 				/>
 			</div>
 		</div>

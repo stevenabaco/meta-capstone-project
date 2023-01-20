@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import Select from 'react-select';
 import styles from './bookings-widget.module.scss';
 
@@ -8,27 +8,19 @@ const formStyles = {
 	gap: '20px',
 };
 
-const BookingsWidget = (props) => {
-	const { state, dispatch, updateTimes } = props;
-	const [date, setDate] = useState('');
-	const [guests, setGuests] = useState('1');
+const BookingsWidget = ({state, dispatch, updateTimes }) => {
+    const [date, setDate] = useState('');
+    const [guests, setGuests] = useState(1);
 	const [occasion, setOccasion] = useState('Birthday');
-	const [selectedOccasion, setSelectedOccasion] = useState({ value: occasion, label: occasion });
-	const occasionOptions = [
+    const [selectedTime, setSelectedTime] = useState(state.selectedTime);
+    const [selectedOccasion, setSelectedOccasion] = useState({ value: occasion, label: occasion });
+    const timeOptions = state.times;
+    const occasionOptions = [
 		{ value: 'Birthday', label: 'Birthday' },
 		{ value: 'Anniversary', label: 'Anniversary' },
     ];
-    
-    const handleAvailableTimeChange = (selectedOption) => {
-		dispatch({ type: 'SELECT_TIME', payload: selectedOption });
-	};
 
-	const handleDateChange = (event) => {
-		setDate(event.target.value);
-		updateTimes(event.target.value);
-	};
-
-	const handleSubmit = (event) => {
+    const handleSubmit = (event) => {
 		event.preventDefault();
 		// For the future if we connect another page we can pass the form data (date, time, guests, occasion) to the next page
 		// we can use the `useHistory` hook from `react-router-dom` to navigate to the next page
@@ -40,6 +32,21 @@ const BookingsWidget = (props) => {
 		console.log('Guests:', guests);
 		console.log('Occasion:', occasion);
 	};
+
+    const handleDateChange = (event) => {
+        setDate(event.target.value);
+        dispatch({type: 'UPDATE_TIMES', payload: event.target.value});
+        updateTimes(event.target.value);
+    };
+
+    const handleTimeChange = (selectedOption) => {
+		dispatch({ type: 'SELECT_TIME', payload: selectedOption });
+        setSelectedTime(selectedOption);
+    };
+
+    const handleOccasionChange = (selectedOption) => {
+        setSelectedOccasion(selectedOption);
+    }
 
 	return (
 		<>
@@ -55,10 +62,10 @@ const BookingsWidget = (props) => {
 				/>
 				<label htmlFor='res-time'>Choose time</label>
 				<Select
-					id='res-time '
-					options={state.times}
-					value={state.selectedTime}
-					onChange={handleAvailableTimeChange}
+					id='res-time'
+					options={timeOptions}
+					value={selectedTime}
+					onChange={handleTimeChange}
 				/>
 				<label htmlFor='guests'>Number of guests</label>
 				<input
@@ -73,12 +80,9 @@ const BookingsWidget = (props) => {
 				<label htmlFor='occasion'>Occasion</label>
 				<Select
 					id='res-occasion'
-					value={selectedOccasion}
-					onChange={(selectedOccasion) => {
-						setSelectedOccasion(selectedOccasion);
-						setOccasion(selectedOccasion);
-					}}
 					options={occasionOptions}
+					value={selectedOccasion}
+					onChange={handleOccasionChange}
 				/>
 				<input
 					type='submit'
