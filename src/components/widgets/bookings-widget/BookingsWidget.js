@@ -8,39 +8,14 @@ const formStyles = {
 	gap: '20px',
 };
 
-const BookingsWidget = () => {
-	const [date, setDate] = useState('');
+const BookingsWidget = (props) => {
+    const { availableTimes, setAvailableTimes } = props;
+    const [selectedTime, setSelectedTime] = useState({ value: availableTimes[0].value, label: availableTimes[0].label });
+    const [date, setDate] = useState('');
 	const [time, setTime] = useState('17:00');
 	const [guests, setGuests] = useState('1');
     const [occasion, setOccasion] = useState('Birthday');
-    const [selectedTime, setSelectedTime] = useState({ value: time, label: time });
     const [selectedOccasion, setSelectedOccasion] = useState({ value: occasion, label: occasion });
-    const timeOptions = [
-            {
-                value: '17:00',
-                label: '17:00'
-            },
-            {
-                value: '18:00',
-                label: '18:00'
-            },
-            {
-                value: '19:00',
-                label: '19:00'
-            },
-            {
-                value: '20:00',
-                label: '20:00'
-            },
-            {
-                value: '21:00',
-                label: '21:00'
-            },
-            {
-                value: '22:00',
-                label: '22:00'
-            }
-    ]
 
     const occasionOptions = [
         {
@@ -52,9 +27,6 @@ const BookingsWidget = () => {
             label: 'Anniversary'
         }
         ]
-            
-        
-    
 
     const handleSubmit = (event) => {
 		event.preventDefault();
@@ -67,7 +39,12 @@ const BookingsWidget = () => {
 		console.log('Time:', time);
 		console.log('Guests:', guests);
 		console.log('Occasion:', occasion);
-	}
+    }
+    
+    const handleAvailableTimeChange = (selectedOption) => {
+        setSelectedTime(selectedOption);
+        setTime(selectedOption);
+    } 
 
 	return (
 		<>
@@ -85,11 +62,8 @@ const BookingsWidget = () => {
 				<Select
 					id='res-time '
 					value={selectedTime}
-					onChange={(selectedTime) => {
-						setSelectedTime(selectedTime);
-						setTime(selectedTime.value);
-					}}
-					options={timeOptions}
+                    onChange={handleAvailableTimeChange}
+					options={availableTimes}
 				/>
 				<label htmlFor='guests'>Number of guests</label>
 				<input
