@@ -1,0 +1,16 @@
+@import '../../../styles/main.scss';
+
+.button {
+    @include resetBtn;
+    background-color: $color-secondary;
+    padding: .75rem 2rem;
+    border-radius: 10px;
+    @include x-rem(font-size, 20px);
+
+    &:hover,&:focus {
+        background-color: $color-tertiary;
+        box-shadow: 1px 1px 25px 1px rgba(0, 0, 0, 0.42);
+	    -webkit-box-shadow: -1px 17px 24px 2px rgba(0, 0, 0, 0.42);
+	    -moz-box-shadow: -1px 17px 24px 2px rgba(0, 0, 0, 0.42);
+    }
+}

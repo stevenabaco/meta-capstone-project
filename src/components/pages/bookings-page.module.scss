@@ -1,0 +1,28 @@
+@import '../../styles/main.scss';
+
+.bookings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+}
+
+.bookings__container {
+    @include container;
+}
+.bookings__image-wrapper {
+    margin: 0;
+
+    img {
+        width:100%;
+        height:100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+
+        max-width: 400px;
+    }
+}
+.bookings__heading {
+    margin-bottom: 0;
+}
+
