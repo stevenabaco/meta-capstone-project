@@ -16,7 +16,7 @@ const HeroSection = () => {
 								We are a family owned Mediterranean restaurant, focused on
 								traditional recipes served with a modern twist.
 							</p>
-							<NavLink to='/reserve-table'>
+							<NavLink to='/reservations'>
 								<button className={`${styles['button']}`}>Reserve Table</button>
 							</NavLink>
 						</div>

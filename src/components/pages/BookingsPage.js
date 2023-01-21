@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import BookingsWidget from '../widgets/bookings-widget/BookingsWidget';
+import BookingsForm from '../widgets/bookings-widget/BookingsForm';
 import styles from './bookings-page.module.scss';
 
 const availableTimesReducer = (state, action) => {
@@ -19,7 +19,7 @@ const availableTimesReducer = (state, action) => {
   }
 };
 
-const initializeTimes = () => {
+export const initializeTimes = () => {
   const initialState = {
     times: [
       { value: '17:00', label: '17:00' },
@@ -31,15 +31,17 @@ const initializeTimes = () => {
     ],
 	  selectedTime: { value: '17:00', label: '17:00' },
   };
+
   return initialState;
 }
 
-const updateTimes = (dispatch) => (date) => {
+export const updateTimes = (dispatch) => (date) => {
 	dispatch({ type: 'UPDATE_TIMES', payload: initializeTimes().times });
 };
 
 const Bookings = () => {
-	const [state, dispatch] = useReducer(availableTimesReducer, initializeTimes());
+  const initialState = initializeTimes();
+	const [state, dispatch] = useReducer(availableTimesReducer, initialState);
 
 	return (
 		<div className={`${styles['bookings']}`}>
@@ -55,10 +57,11 @@ const Bookings = () => {
 					Make a reservation and have you table prepared in time. Your can make anytime
 					reservations as much as they are with our operating ours.
 				</p>
-				<BookingsWidget
+				<BookingsForm
 					state={state}
           dispatch={dispatch}
           updateTimes={updateTimes(dispatch)}
+          initializeTimes={initializeTimes}
 				/>
 			</div>
 		</div>

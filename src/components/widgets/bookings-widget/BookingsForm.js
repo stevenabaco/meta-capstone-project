@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import Select from 'react-select';
-import styles from './bookings-widget.module.scss';
+import styles from './bookings-form.module.scss';
 
 const formStyles = {
 	display: 'grid',
@@ -8,11 +8,11 @@ const formStyles = {
 	gap: '20px',
 };
 
-const BookingsWidget = ({state, dispatch, updateTimes }) => {
+const BookingsForm = ({state, dispatch, updateTimes}) => {
     const [date, setDate] = useState('');
     const [guests, setGuests] = useState(1);
 	const [occasion, setOccasion] = useState('Birthday');
-    const [selectedTime, setSelectedTime] = useState(state.selectedTime);
+    const [selectedTime, setSelectedTime] = useState(state ? state.selectedTime : {value: '17:00', label: '17:00'});
     const [selectedOccasion, setSelectedOccasion] = useState({ value: occasion, label: occasion });
     const timeOptions = state.times;
     const occasionOptions = [
@@ -44,8 +44,9 @@ const BookingsWidget = ({state, dispatch, updateTimes }) => {
         setSelectedTime(selectedOption);
     };
 
-    const handleOccasionChange = (selectedOption) => {
-        setSelectedOccasion(selectedOption);
+    const handleOccasionChange = (selectedOccasion) => {
+		setSelectedOccasion(selectedOccasion);
+		setOccasion(selectedOccasion);
     }
 
 	return (
@@ -94,4 +95,4 @@ const BookingsWidget = ({state, dispatch, updateTimes }) => {
 	);
 };
 
-export default BookingsWidget;
+export default BookingsForm;
