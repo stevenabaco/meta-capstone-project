@@ -1,0 +1,28 @@
+@import '../../../styles/main.scss';
+
+.confirmation {
+
+}
+
+.confirmation__container-block {
+    max-width: $container-size;
+    margin: auto;
+    text-align: center;
+}
+
+.confirmation-content__container-block {
+    max-width: 10rem;
+    margin: auto;
+    text-align: left;
+}
+.confirmation__title {
+    margin-bottom: 0;
+}
+.confirmation__text {
+    font-weight: 800;
+
+    span {
+        font-weight: 500;
+        color: $color-primary;
+    }
+}

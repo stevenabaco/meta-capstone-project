@@ -1,6 +1,8 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import styles from './bookings-form.module.scss';
+import { submitAPI } from '../../../api';
 
 const formStyles = {
 	display: 'grid',
@@ -8,46 +10,48 @@ const formStyles = {
 	gap: '20px',
 };
 
-const BookingsForm = ({state, dispatch, updateTimes}) => {
-    const [date, setDate] = useState('');
-    const [guests, setGuests] = useState(1);
-	const [occasion, setOccasion] = useState('Birthday');
-    const [selectedTime, setSelectedTime] = useState(state ? state.selectedTime : {value: '17:00', label: '17:00'});
-    const [selectedOccasion, setSelectedOccasion] = useState({ value: occasion, label: occasion });
-    const timeOptions = state.times;
-    const occasionOptions = [
+const BookingsForm = ({ state, dispatch, updateTimes}) => {
+	const navigate = useNavigate();
+	const [date, setDate] = useState(new Date());
+	const [guests, setGuests] = useState(1);
+	const [occasion, setOccasion] = useState('');
+	const [selectedTime, setSelectedTime] = useState(state.selectedTime);
+	const [selectedOccasion, setSelectedOccasion] = useState(state.selectedOccasion);
+	const timeOptions = state.times.map((time) => {
+		return { value: time, label: time };
+	});
+	const occasionOptions = [
 		{ value: 'Birthday', label: 'Birthday' },
 		{ value: 'Anniversary', label: 'Anniversary' },
-    ];
+	];
 
-    const handleSubmit = (event) => {
-		event.preventDefault();
-		// For the future if we connect another page we can pass the form data (date, time, guests, occasion) to the next page
-		// we can use the `useHistory` hook from `react-router-dom` to navigate to the next page
-		// and pass the form data as props to the next page component
-		// for now we can just console log the data to make sure it's pulling the information
-		console.log('Your reservation has been completed!');
-		console.log('Date:', date);
-		console.log('Time:', state.selectedTime);
-		console.log('Guests:', guests);
-		console.log('Occasion:', occasion);
+	const handleDateChange = (date) => {
+		setDate(date);
+		updateTimes(date);
 	};
 
-    const handleDateChange = (event) => {
-        setDate(event.target.value);
-        dispatch({type: 'UPDATE_TIMES', payload: event.target.value});
-        updateTimes(event.target.value);
-    };
-
-    const handleTimeChange = (selectedOption) => {
+	const handleTimeChange = (selectedOption) => {
+		setSelectedTime(selectedOption);
 		dispatch({ type: 'SELECT_TIME', payload: selectedOption });
-        setSelectedTime(selectedOption);
-    };
+	};
 
-    const handleOccasionChange = (selectedOccasion) => {
-		setSelectedOccasion(selectedOccasion);
-		setOccasion(selectedOccasion);
-    }
+	const handleOccasionChange = (selectedOption) => {
+		setSelectedOccasion(selectedOption);
+		setOccasion(selectedOption);
+	};
+
+	const handleGuestsChange = (e) => {
+		setGuests(e.target.value);
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log(event);
+		const data = { date, guests, occasion, selectedTime };
+		console.log(data)
+		submitAPI(data);
+		navigate('/reservations/confirmation', { state: data });
+	};
 
 	return (
 		<>
@@ -59,7 +63,7 @@ const BookingsForm = ({state, dispatch, updateTimes}) => {
 					type='date'
 					id='res-date'
 					value={date}
-					onChange={handleDateChange}
+					onChange={(e) => handleDateChange(e.target.value)}
 				/>
 				<label htmlFor='res-time'>Choose time</label>
 				<Select
@@ -76,7 +80,7 @@ const BookingsForm = ({state, dispatch, updateTimes}) => {
 					max='10'
 					id='guests'
 					value={guests}
-					onChange={(e) => setGuests(e.target.value)}
+					onChange={handleGuestsChange}
 				/>
 				<label htmlFor='occasion'>Occasion</label>
 				<Select
@@ -87,7 +91,7 @@ const BookingsForm = ({state, dispatch, updateTimes}) => {
 				/>
 				<input
 					type='submit'
-					value='Make Your reservation'
+					value='Make a reservation'
 					className={`${styles['button']}`}
 				/>
 			</form>
