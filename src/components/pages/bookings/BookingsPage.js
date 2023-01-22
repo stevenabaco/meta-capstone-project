@@ -40,8 +40,8 @@ export const initializeTimes = () => {
 	return initialState;
 };
 
-export const updateTimes = (dispatch) => (date) => {
-	const dateObject = new Date(date);
+export const updateTimes = (dispatch) => (formattedDate) => {
+	const dateObject = new Date(formattedDate);
 	const availableTimes = fetchAPI(dateObject);
 	dispatch({ type: 'UPDATE_DATE', payload: dateObject });
 	dispatch({ type: 'UPDATE_TIMES', payload: availableTimes });

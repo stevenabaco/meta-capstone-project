@@ -11,9 +11,9 @@
 }
 
 .confirmation-content__container-block {
-    max-width: 10rem;
+    max-width: $container-size;
     margin: auto;
-    text-align: left;
+    text-align: center;
 }
 .confirmation__title {
     margin-bottom: 0;

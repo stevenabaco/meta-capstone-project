@@ -14,3 +14,8 @@
 	    -moz-box-shadow: -1px 17px 24px 2px rgba(0, 0, 0, 0.42);
     }
 }
+
+.form-error {
+    color: firebrick;
+    // @include x-rem(font-size, 25px);
+}

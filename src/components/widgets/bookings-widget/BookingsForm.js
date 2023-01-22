@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import styles from './bookings-form.module.scss';
 import { submitAPI } from '../../../api';
+import * as Yup from 'yup';
 
 const formStyles = {
 	display: 'grid',
@@ -10,10 +11,28 @@ const formStyles = {
 	gap: '20px',
 };
 
+const validationSchema = Yup.object().shape({
+	date: Yup.date().required('Please select a date'),
+	guests: Yup.number()
+		.required('Please enter number of guests')
+		.min(2, 'There must be at least two people to reserve a table')
+		.max(10, "Sorry, we can't seat more than 10 people a table"),
+	occasion: Yup.string().required('Please select an occasion'),
+	selectedTime: Yup.object().required('Please select a time'),
+
+});
 const BookingsForm = ({ state, dispatch, updateTimes}) => {
 	const navigate = useNavigate();
-	const [date, setDate] = useState(new Date());
-	const [guests, setGuests] = useState(1);
+	const [errors, setErrors] = useState({})
+	const currentDate = new Date();
+	const year = currentDate.getFullYear();
+	const month = currentDate.getMonth() + 1;
+	const day = currentDate.getDate();
+	const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
+		.toString()
+		.padStart(2, '0')}`;
+	const [date, setDate] = useState(formattedDate);
+	const [guests, setGuests] = useState(0);
 	const [occasion, setOccasion] = useState('');
 	const [selectedTime, setSelectedTime] = useState(state.selectedTime[0]);
 	const [selectedOccasion, setSelectedOccasion] = useState(state.selectedOccasion);
@@ -25,19 +44,26 @@ const BookingsForm = ({ state, dispatch, updateTimes}) => {
 		{ value: 'Anniversary', label: 'Anniversary' },
 	];
 
-	const handleDateChange = (date) => {
-		setDate(date);
-		updateTimes(date);
+	const handleDateChange = (e) => {
+		const currentDate = new Date(e.target.value);
+		const year = currentDate.getFullYear();
+		const month = currentDate.getMonth() + 1;
+		const day = currentDate.getDate();
+		const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
+			.toString()
+			.padStart(2, '0')}`;
+		setDate(formattedDate);
+		updateTimes(formattedDate);
 	};
 
 	const handleTimeChange = (selectedOption) => {
 		setSelectedTime(selectedOption);
-		dispatch({ type: 'SELECT_TIME', payload: selectedOption });
+		dispatch({ type: 'SELECT_TIME', payload: selectedOption});
 	};
 
 	const handleOccasionChange = (selectedOption) => {
 		setSelectedOccasion(selectedOption);
-		setOccasion(selectedOption);
+		setOccasion(selectedOption.label);
 	};
 
 	const handleGuestsChange = (e) => {
@@ -48,50 +74,71 @@ const BookingsForm = ({ state, dispatch, updateTimes}) => {
 		event.preventDefault();
 		console.log(event);
 		const data = { date, guests, occasion, selectedTime };
-		console.log(data)
-		submitAPI(data);
-		navigate('/reservations/confirmation', { state: data });
+		console.log(data);
+		validationSchema.validate(data, { abortEarly: false }).then(() => {
+			submitAPI(data);
+			navigate('/reservations/confirmation', { state: data });
+		}).catch((errors) => {
+			 const errorMap = {};
+				errors.inner.forEach((error) => {
+					errorMap[error.path] = error.message;
+				});
+				setErrors(errorMap);
+		})
+
 	};
 
 	useEffect(() => {
 		updateTimes(date)
-	},[])
+	}, [])
+
 	return (
 		<>
 			<form
 				style={formStyles}
 				onSubmit={handleSubmit}>
-				<label htmlFor='res-date'>Choose date</label>
+				<label htmlFor='date'>Choose date</label>
 				<input
+					id="date"
 					type='date'
-					id='res-date'
+					name='date'
 					value={date}
-					onChange={(e) => handleDateChange(e.target.value)}
+					onChange={handleDateChange}
 				/>
-				<label htmlFor='res-time'>Choose time</label>
+				{errors.date && (
+					<div className={`${styles['form-error']}`}>{errors.date}</div>
+				)}
+				<label htmlFor='time'>Choose time</label>
 				<Select
-					id='res-time'
+					id="time"
+					name='selectedTime'
 					options={timeOptions}
-					value={selectedTime}
+					value={timeOptions.label}
 					onChange={handleTimeChange}
 				/>
+				{errors.selectedTime && (
+					<div className={`${styles['form-error']}`}>{errors.selectedTime}</div>
+				)}
 				<label htmlFor='guests'>Number of guests</label>
 				<input
+					id="guests"
 					type='number'
-					placeholder='1'
-					min='1'
-					max='10'
-					id='guests'
+					name='guests'
 					value={guests}
 					onChange={handleGuestsChange}
 				/>
+				{errors.guests && <div className={`${styles['form-error']}`}>{errors.guests}</div>}
 				<label htmlFor='occasion'>Occasion</label>
 				<Select
-					id='res-occasion'
+					id="occasion"
+					name='occasion'
 					options={occasionOptions}
 					value={selectedOccasion}
 					onChange={handleOccasionChange}
 				/>
+				{errors.occasion && (
+					<div className={`${styles['form-error']}`}>{errors.occasion}</div>
+				)}
 				<input
 					type='submit'
 					value='Make a reservation'
