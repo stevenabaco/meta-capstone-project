@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import styles from './bookings-form.module.scss';
@@ -15,7 +15,7 @@ const BookingsForm = ({ state, dispatch, updateTimes}) => {
 	const [date, setDate] = useState(new Date());
 	const [guests, setGuests] = useState(1);
 	const [occasion, setOccasion] = useState('');
-	const [selectedTime, setSelectedTime] = useState(state.selectedTime);
+	const [selectedTime, setSelectedTime] = useState(state.selectedTime[0]);
 	const [selectedOccasion, setSelectedOccasion] = useState(state.selectedOccasion);
 	const timeOptions = state.times.map((time) => {
 		return { value: time, label: time };
@@ -53,6 +53,9 @@ const BookingsForm = ({ state, dispatch, updateTimes}) => {
 		navigate('/reservations/confirmation', { state: data });
 	};
 
+	useEffect(() => {
+		updateTimes(date)
+	},[])
 	return (
 		<>
 			<form

@@ -1,12 +1,14 @@
 
 import { render, screen } from '@testing-library/react';
 import Bookings, { initializeTimes, updateTimes } from './components/pages/bookings/BookingsPage';
+import ConfirmedBooking from './components/pages/confirmations/ConfirmedBooking';
 import { localStorage } from 'jest-localstorage-mock';
+import App from './App';
 
-test('renders the choose date label to say "Choose date"', () => {
-  render(<Bookings />);
-  const chatInputLabel = screen.getByText("Choose date");
-  expect(chatInputLabel).toBeInTheDocument();
+test('Highlight title should be "This weeks specials!', () => {
+  render(<App />);
+  const highlightsTitle = screen.getByText("This weeks Specials!");
+  expect(highlightsTitle).toBeInTheDocument();
 });
 
 describe('initializeTimes', () => {

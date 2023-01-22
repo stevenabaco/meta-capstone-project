@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import BookingsForm from '../../widgets/bookings-widget/BookingsForm';
 import styles from './bookings-page.module.scss';
 import { fetchAPI } from '../../../api';
@@ -53,7 +52,7 @@ export const Bookings = () => {
 	const [state, dispatch] = useReducer(availableTimesReducer, initialState);
 
 	return (
-		<Router>
+
 			<div className={`${styles['bookings']}`}>
 				<div className={`${styles['bookings__container']}`}>
 					<div className={`${styles['bookings__image-wrapper']}`}>
@@ -75,7 +74,6 @@ export const Bookings = () => {
 					/>
 				</div>
 			</div>
-		</Router>
 	);
 };
 

@@ -31,7 +31,6 @@ const ConfirmedBooking = () => {
 					</p>
 				</div>
 			</div>
-			//{' '}
 		</div>
 	);       
 }
