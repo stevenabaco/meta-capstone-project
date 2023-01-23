@@ -9,7 +9,8 @@ import { NavLink } from 'react-router-dom';
 const HighlightsSection = () => {
     return (
 		<div className={`${styles['highlights__block-row']}`}>
-			<section
+            <section
+                aria-label="Highlights Section"
 				id='highlights'
 				className={`${styles['highlights']}`}>
 				<div className={`${styles['highlights__container']}`}>
